@@ -1,14 +1,23 @@
+$(document).ready(function () {
+  $('#new-todo-title').keydown(function (key) {
+    if (key.keyCode == 13) {
+      add();
+    }
+  });
+});
+
 function add() {
-  const data = document.getElementById('new-todo-title').value;
+  const element = document.getElementById('new-todo-title');
+  const data = element.value;
   document.getElementById('todo-list').innerHTML += `
-  <ul id="todo-list" class="todo-list">
   <li>
     <div class="view">
-      <input class="toggle" type="checkbox"/>
+      <input class="toggle" type="checkbox" onchange="setState(this)"/>
       <label class="label">${data}</label>
       <button class="destroy"></button>
     </div>
     <input class="edit" value="${data}" />
   </li>
 `;
+  element.value = '';
 }

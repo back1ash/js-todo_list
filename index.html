@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>이벤트 - TODOS</title>
     <link rel="stylesheet" href="./src/css/style.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./src/js/additem.js"></script>
     <script src="./src/js/delitem.js"></script>
+    <script src="./src/js/setstate.js"></script>
   </head>
   <body>
     <div class="todoapp">
@@ -16,8 +18,6 @@
         class="new-todo"
         placeholder="할일을 추가해주세요"
         autofocus
-        onkeypress="add();
-        console.log('제출');"
       />
       <main>
         <input class="toggle-all" type="checkbox" />
