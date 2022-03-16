@@ -14,7 +14,7 @@ function add() {
     <div class="view">
       <input class="toggle" type="checkbox" onchange="setState(this)"/>
       <label class="label">${data}</label>
-      <button class="destroy"></button>
+      <button class="destroy" onclick="del(this)"></button>
     </div>
     <input class="edit" value="${data}" />
   </li>
