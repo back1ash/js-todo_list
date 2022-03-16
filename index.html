@@ -6,9 +6,6 @@
     <title>이벤트 - TODOS</title>
     <link rel="stylesheet" href="./src/css/style.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="./src/js/additem.js"></script>
-    <script src="./src/js/delitem.js"></script>
-    <script src="./src/js/setstate.js"></script>
   </head>
   <body>
     <div class="todoapp">
@@ -22,9 +19,8 @@
       <main>
         <input class="toggle-all" type="checkbox" />
         <ul id="todo-list" class="todo-list"></ul>
-
         <div class="count-container">
-          <span class="todo-count">총 <strong>0</strong> 개</span>
+          <span class="todo-count">총 <strong id="amount">0</strong> 개</span>
           <ul class="filters">
             <li>
               <a class="all selected" href="#">전체보기</a>
@@ -39,5 +35,8 @@
         </div>
       </main>
     </div>
+    <script type="module" src="./src/js/additem.js"></script>
+    <script type="module" src="./src/js/delitem.js"></script>
+    <script src="./src/js/setstate.js"></script>
   </body>
 </html>
