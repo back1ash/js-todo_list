@@ -1,3 +1,4 @@
+// 할일 완료시 체크 기능
 function setState(cb) {
   const li_tag = cb.parentNode.parentNode;
   cb.checked = li_tag.className ? false : true;
