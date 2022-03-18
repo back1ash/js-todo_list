@@ -6,7 +6,7 @@ function changeval(input) {
   if (key == 13) {
     console.log(input);
     label.innerText = input.value;
-    input.val = li.className = '';
+    li.classList.remove('editing');
     console.log('enter 입력됨.');
   }
   if (key == 27) {

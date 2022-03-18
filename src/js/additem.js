@@ -13,18 +13,21 @@ $(document).ready(function () {
 function additem() {
   const element = document.getElementById('new-todo-title');
   const data = element.value;
-  document.getElementById('todo-list').innerHTML += `
-  <li>
-    <div class="view">
-      <input class="toggle" type="checkbox" onchange="setState(this)"/>
-      <label class="label" ondblclick="editing(this)">${data}</label>
-      <button class="destroy"></button>
-    </div>
-    <input class="edit" value="${data}" onkeyup="changeval(this);"
-    />
-  </li>
-`;
+  if (data) {
+    document.getElementById('todo-list').innerHTML += `
+    <li class="active">
+      <div class="view">
+        <input class="toggle" type="checkbox" onchange="setState(this)"/>
+        <label class="label" ondblclick="editing(this)">${data}</label>
+        <button class="destroy"></button>
+      </div>
+      <input class="edit" value="${data}" onkeyup="changeval(this);"
+      />
+    </li>
+  `;
+    console.log('값 추가됨.');
+  }
   element.value = '';
-  console.log('값 추가됨.');
+
   count();
 }
