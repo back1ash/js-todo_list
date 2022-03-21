@@ -1,5 +1,5 @@
-const ACTIVE = 'active';
-const COMPLETED = 'completed';
-const ALL = '';
+export const ACTIVE = '.active';
+export const COMPLETED = '.completed';
+export const ALL = '.view';
 
 export default { ACTIVE, COMPLETED, ALL };

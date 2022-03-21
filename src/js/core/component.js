@@ -1,10 +1,6 @@
-import { ALL } from './constances';
+import ALL from './constances.js';
 
 export default class Component {
-  constructor() {
-    this.filter = ALL;
-    this.amount;
-  }
   //웹 접속시 최초 1회 기본 템플릿 생성
   render() {}
   //렌더 이후 작동 할 내용
