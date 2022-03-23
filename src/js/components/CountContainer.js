@@ -8,8 +8,9 @@ export default class CountContainer {
     this.render();
   }
 
-  count(filter) {
-    this.props.count = $$(filter).length;
+  count(props) {
+    this.props = props;
+    this.props.count = this.props.todolist.length;
     this.render();
   }
   render() {
@@ -29,7 +30,7 @@ export default class CountContainer {
     `;
     $('.filters').addEventListener('click', (e) => {
       $('.selected').classList.remove('selected');
-      console.log(e.target.classList.add('selected'));
+      e.target.classList.add('selected');
     });
   }
 }

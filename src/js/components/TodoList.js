@@ -1,88 +1,78 @@
 import { $ } from '../utils/selector.js';
+import { COMPLETED } from '../core/constances.js';
 
 // new-todo 입력 처리
 export default class TodoList {
-  constructor({ $target, delTodo, setCheck, props }) {
+  constructor({ $target, delTodo, setCheck, editTodo, props }) {
     this.$target = $target;
     this.delTodo = delTodo;
     this.setCheck = setCheck;
+    this.editTodo = editTodo;
     this.props = props;
 
     $target.addEventListener('click', (e) => {
-      console.log(e.target.closest('button'));
+      if (e.target.closest('button') !== null) {
+        this.del(e.target.previousElementSibling);
+      }
+      if (e.target.closest('.toggle') !== null) {
+        this.check(e.target.nextElementSibling);
+      }
+    });
+    $target.addEventListener('dblclick', (e) => {
+      if (e.target.closest('.label') !== null) {
+        this.edit(e);
+      }
     });
     this.render();
+    //this.setEventListener();
   }
-  t;
 
-  add($target, todo) {
-    $target.innerHTML += `
-    <li data-list data-index="" class="active">
-    <div class="view">
-      <input class="toggle" type="checkbox"/>
-      <label class="label">${todo}</label>
-      <button class="destroy"></button>
-    </div>
-    <input class="edit" value="${todo}" />
-  </li>
-    `;
-    $('#new-todo-title').value = '';
-    $('.toggle').addEventListener('click', (e) => {
-      this.setCheck(e.target);
-    });
-    $('.destroy').addEventListener('click', (e) => {
-      console.log(this);
-      this.delTodo(e.target.parentNode.parentNode);
-    });
+  add(props) {
+    this.props = props;
+    this.render();
   }
+
   render() {
+    console.log(this.props.todolist);
     this.$target.innerHTML =
       `
-    <ul id="todo-list" class="todo-list">
     ${this.props.todolist
       .map(
-        ({ todo }) => `
-    <li data-list data-index="" class="active">
+        (todo) => `
+    <li data-list class="${todo.progress}">
     <div class="view">
-      <input class="toggle" type="checkbox"/>
-      <label class="label">${todo}</label>
+      <input class="toggle" type="checkbox" ${
+        todo.progress == COMPLETED ? 'checked' : ''
+      }/>
+      <label class="label">${todo.content}</label>
       <button class="destroy"></button>
     </div>
-    <input class="edit" value="${todo}" />
+    <input class="edit" value="${todo.content}" />
   </li>`
       )
       .join('')}
-    </ul>
     ` + this.$target.innerHTML;
   }
 
-  del($target) {
-    $target.remove();
-  }
-
-  //li에 더블클릭 리스너 설정
-  edit($target, key) {
-    const input = $target.childElement('input');
-    const label = $target.childElement('label');
-    $target.className = 'editing';
-    if (key == 13) {
-      label.innerText = input.value;
-      li.classList.remove('editing');
-      console.log('enter 입력됨.');
-    }
-    if (key == 27) {
-      input.value = label.innerText;
-      li.className = '';
-      console.log('esc 입력됨.');
-    }
-  }
-
   check($target) {
-    console.log($target);
-    const li_tag = $target.parentNode.parentNode;
-    $target.checked = li_tag.className == 'active' ? true : false;
-    li_tag.className = $target.checked ? 'completed' : 'active';
-    console.log('Checked 변경됨.');
+    this.setCheck($target.innerHTML);
+  }
+
+  del($target) {
+    this.delTodo($target.innerHTML);
+  }
+
+  edit($event) {
+    $event.path[2].classList.add('editing');
+    $('.edit').addEventListener('keypress', (e) => {
+      if (e.keyCode == 13) {
+        this.editTodo(e);
+      }
+      if (e.keyCode == 27) {
+        console.log('esc 입력됨.');
+        $event.path[2].classList.remove('editing');
+      }
+    });
   }
 
   filter() {
