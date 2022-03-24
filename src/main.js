@@ -1,4 +1,4 @@
 import App from './App.js';
-import { $ } from './utils/selector.js';
+import { $ } from './utils/Selectors.js';
 
 new App($('.todoapp'));
