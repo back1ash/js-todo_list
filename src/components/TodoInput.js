@@ -20,7 +20,7 @@ export default class TodoInput {
   }
   setEventListener() {
     $('.todo-input').addEventListener('keypress', (e) => {
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 && e.target.value !== "") {
         this.addTodo(e.target.value);
       }
     });
